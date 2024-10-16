@@ -9,7 +9,7 @@ import uvicorn as uv
 from warnings import filterwarnings
 
 from utils.hugginfaceTest import GenerateText
-from models.promtschema import PromtSchema
+from models.promptschema import PromptSchema
 
 filterwarnings("always")
 filterwarnings("ignore")
@@ -40,7 +40,7 @@ async def datalog() -> dict[str, str]:
 
 
 @app.post("/text-generation")
-async def generate(input: PromtSchema = Body(...)):
+async def generate(input: PromptSchema = Body(...)):
   text: str = input.prompt
   if len(text) < 1 or text is None:
     raise HTTPException(detail="Invalid prompt", status_code=status.HTTP_400_BAD_REQUEST)
